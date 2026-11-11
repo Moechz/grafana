@@ -1,0 +1,93 @@
+{
+  "app_id": "grafanadocker",
+  "title": "Grafana",
+  "image": "grafana/grafana:13.3.0",
+  "repo_name": "grafana",
+  "mode": "plain",
+  "container_port": 3000,
+  "category": [
+    "Development_Tools"
+  ],
+  "volumes": [
+    {
+      "host": "/Volume1/DockerAppData/grafanadocker/var",
+      "container": "/var/lib/grafana"
+    }
+  ],
+  "env": {
+    "TZ": "Asia/Shanghai"
+  },
+  "auth": "Grafana Labs",
+  "upstream_url": "https://github.com/grafana/grafana",
+  "upstream_license": "AGPL-3.0",
+  "descript": "Grafana is the open observability platform: query, visualize and alert on metrics and logs from Prometheus, Loki, InfluxDB and many other data sources. This package runs the official Docker Hub image as a non-root container (uid 472) and keeps dashboards, plugins and the SQLite database in the application data folder.",
+  "release_note": "1. First release.",
+  "important": "First run: open the web UI and log in with admin/admin, then change the password. Data lives in /Volume1/DockerAppData/grafanadocker/ and survives restarts and updates. The container runs as uid 472, so mounted folders must be readable by that user. Needs DockerEngine; configure a registry mirror if Docker Hub is unreachable. Back up the application data folder before uninstalling with data removal. Plain HTTP on the LAN.",
+  "probe": {
+    "user_in_image": "472",
+    "entrypoint": [
+      "/run.sh"
+    ],
+    "cmd": null,
+    "exposed_ports": [
+      3000
+    ],
+    "declared_volumes": [],
+    "image_healthcheck": [],
+    "digest": "grafana/grafana@sha256:488984b716c0862639f91a698adbe2862677a5a07bad42da5f03f3030883b205",
+    "architecture": "x86_64",
+    "platforms": [],
+    "http_client_in_image": "curl",
+    "trial_run": {
+      "ok": true,
+      "http_code": "302",
+      "state": "running",
+      "paths": [
+        "/var"
+      ],
+      "host_port": 18000,
+      "log_tail": "=\"app registry initialized\"\nlogger=ngalert.rulesync t=2026-11-11T05:13:56.143886363Z level=info msg=\"Starting external ruler syncer\" check_interval=10s\nlogger=backgroundsvcs.managerAdapter t=2026-11-11T05:13:56.146523301Z level=info msg=\"All modules healthy\"\nlogger=ngalert.state.manager t=2026-11-11T05:13:56.148279264Z level=info msg=\"State cache has been initialized\" rules=0 states=0 duration=4.906459ms\nlogger=ngalert.scheduler t=2026-11-11T05:13:56.148402828Z level=info msg=\"Starting scheduler\" tickInterval=10s maxAttempts=3\nlogger=ngalert.scheduler t=2026-11-11T05:13:56.148536516Z level=info msg=starting component=ticker first_tick=2026-11-11T05:14:00Z\nlogger=http.server t=2026-11-11T05:13:56.149595006Z level=info msg=\"HTTP Server Listen\" address=[::]:3000 protocol=http subUrl= socket=\nlogger=sqlstore.transactions t=2026-11-11T05:13:56.186132083Z level=info msg=\"Database locked, sleeping then retrying\" error=\"database is locked (5) (SQLITE_BUSY)\" retry=0 sleep=54.714307ms\nlogger=grafana.update.checker t=2026-11-11T05:13:57.000498882Z level=info msg=\"Update check succeeded\" duration=854.238611ms\nlogger=context userId=0 orgId=0 uname= t=2026-11-11T05:13:57.120760094Z level=info msg=\"Request Completed\" method=GET path=/ status=302 remote_addr=172.17.0.1 time_ms=0 duration=146.378µs size=29 referer= handler=/ status_source=server\nlogger=plugin.backgroundinstaller t=2026-11-11T05:13:57.418122079Z level=info msg=\"Installing plugin\" pluginId=grafana-postgresql-datasource version=",
+      "files_in_mounts": ""
+    },
+    "docker_hub": {},
+    "github": {
+      "owner": "grafana",
+      "repo": "grafana",
+      "description": "The open and composable observability and data visualization platform. Visualize metrics, logs, and traces from multiple sources like Prometheus, Loki, Elasticsearch, InfluxDB, Postgres and many more. ",
+      "license": "AGPL-3.0",
+      "homepage": "https://grafana.com"
+    }
+  },
+  "healthcheck": [
+    "CMD-SHELL",
+    "wget -q -O /dev/null http://127.0.0.1:3000/api/health || exit 1"
+  ],
+  "platform": "x86_64",
+  "user": "472:472",
+  "publisher": "Moechz",
+  "compose_project": "grafanadocker",
+  "github_repo": "grafana",
+  "upstream_version": "13.3.0",
+  "release_tag_prefix": "v",
+  "version": "13.3.0-1",
+  "help": "https://github.com/Moechz/grafana/issues",
+  "official": "https://github.com/grafana/grafana",
+  "license": "AGPL-3.0",
+  "docker_socket": false,
+  "group_add": [],
+  "platforms": [
+    "x86_64",
+    "aarch64"
+  ],
+  "translations": {
+    "zh-cn": {
+      "descript": "指标可视化与监控面板，支持 Prometheus 等数据源。",
+      "important": "首次使用请打开网页完成初始化。数据保存在 DockerAppData/grafanadocker，重启和升级不会丢失。容器以 uid 1000 运行，挂载目录需对该用户可读。需要 DockerEngine；Docker Hub 不可达时先配置镜像加速。卸载并删除数据前请备份。局域网内为 HTTP。"
+    },
+    "zh-hk": {
+      "descript": "指标可视化与监控面板，支持 Prometheus 等数据源。",
+      "important": "首次使用請開啟網頁完成初始化。資料保存在 DockerAppData/grafanadocker，重新啟動和升級不會遺失。容器以 uid 1000 運行，掛載目錄需對該使用者可讀。需要 DockerEngine；Docker Hub 不可達時先設定鏡像加速。解除安裝並刪除資料前請備份。區域網路內為 HTTP。"
+    }
+  },
+  "host_port": 8067
+}
